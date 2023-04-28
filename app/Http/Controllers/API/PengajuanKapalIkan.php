@@ -84,8 +84,16 @@ class PengajuanKapalIkan extends Controller
         }
     }
 
-    public function tolak($id)
+    public function tolak(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'alasan' => ['required'],
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->messages());
+        }
+
         DB::beginTransaction();
         try {
             $user = KapalIkan::find($id);
@@ -94,11 +102,12 @@ class PengajuanKapalIkan extends Controller
             if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
 
             $user->status = KapalIkan::DITOLAK;
+            $user->alasan_ditolak = $request->alasan;
             $user->save();
 
             DB::commit();
 
-            return response()->json(['status' => false, 'message' => 'Suskes tolak pengajuan kapal ikan']);
+            return response()->json(['status' => false, 'message' => 'Suskes tolak pengajuan kapal ikan dengan alasan ' . $request->alasan]);
         } catch (Exception $e) {
             DB::rollback();
 
