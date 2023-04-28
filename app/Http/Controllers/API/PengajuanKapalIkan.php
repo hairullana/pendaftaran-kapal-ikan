@@ -122,17 +122,33 @@ class PengajuanKapalIkan extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = KapalIkan::find($id);
+            $kapal_ikan = KapalIkan::find($id);
 
             // jika sudah di acc atau tolak
-            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
+            if ($kapal_ikan->status == 0 || $kapal_ikan->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
 
-            $user->status = KapalIkan::DITERIMA;
-            $user->save();
+            $kapal_ikan->status = KapalIkan::DITERIMA;
+            $kapal_ikan->save();
 
             DB::commit();
 
             return response()->json(['status' => false, 'message' => 'Suskes terima pengajuan kapal ikan']);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function hapus($id)
+    {
+        DB::beginTransaction();
+        try {
+            KapalIkan::find($id)->delete();
+
+            DB::commit();
+
+            return response()->json(['status' => false, 'message' => 'Suskes hapus kapal ikan']);
         } catch (Exception $e) {
             DB::rollback();
 
@@ -152,14 +168,14 @@ class PengajuanKapalIkan extends Controller
 
         DB::beginTransaction();
         try {
-            $user = KapalIkan::find($id);
+            $kapal_ikan = KapalIkan::find($id);
 
             // jika sudah di acc atau tolak
-            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
+            if ($kapal_ikan->status == 0 || $kapal_ikan->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
 
-            $user->status = KapalIkan::DITOLAK;
-            $user->alasan_ditolak = $request->alasan;
-            $user->save();
+            $kapal_ikan->status = KapalIkan::DITOLAK;
+            $kapal_ikan->alasan_ditolak = $request->alasan;
+            $kapal_ikan->save();
 
             DB::commit();
 
