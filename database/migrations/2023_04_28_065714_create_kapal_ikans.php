@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('foto_kapal');
             $table->string('nomor_izin');
             $table->string('dokumen_perizinan');
+            $table->integer('status');
             $table->timestamps();
         });
     }

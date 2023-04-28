@@ -32,7 +32,19 @@ class PengajuanKapalIkan extends Controller
 
         DB::beginTransaction();
         try {
-            KapalIkan::create($request->all());
+            KapalIkan::create([
+                'kode_kapal' => $request->kode_kapal,
+                'nama_kapal' => $request->nama_kapal,
+                'nama_pemilik' => $request->nama_pemilik,
+                'alamat_pemilik' => $request->alamat_pemilik,
+                'ukuran_kapal' => $request->ukuran_kapal,
+                'kapten' => $request->kapten,
+                'jumlah_anggota' => $request->jumlah_anggota,
+                'foto_kapal' => $request->foto_kapal,
+                'nomor_izin' => $request->nomor_izin,
+                'dokumen_perizinan' => $request->dokumen_perizinan,
+                'status' => KapalIkan::PENGAJUAN
+            ]);
 
             DB::commit();
 
@@ -42,5 +54,11 @@ class PengajuanKapalIkan extends Controller
 
             return response()->json(['status' => false, 'message' => $e->getMessage()]);
         }
+    }
+
+    public function list()
+    {
+        $new_kapal = KapalIkan::where('status', KapalIkan::PENGAJUAN)->get();
+        return response(['status' => true, 'data' => $new_kapal]);
     }
 }

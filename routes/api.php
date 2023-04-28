@@ -35,4 +35,5 @@ Route::middleware('auth:api')->group(function () {
 // kapal ikan pengajuan
 Route::middleware('auth:api')->group(function() {
     Route::post('/pengajuan-kapal-ikan', [PengajuanKapalIkan::class, 'pengajuan'])->name('pengajuan-kapal-ikan')->middleware('role:user');
+    Route::get('/list-pengajuan-kapal-ikan', [PengajuanKapalIkan::class, 'list'])->name('list-pengajuan-kapal-ikan')->middleware('role:admin');
 });
