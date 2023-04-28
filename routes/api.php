@@ -20,5 +20,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/register-confirmation/{email}/{otp}', [AuthController::class, 'confirmation1'])->name('confirmation');
-Route::post('/register-confirmation', [AuthController::class, 'confirmation2'])->name('confirmation2');
+Route::get('/register-confirmation/{email}/{otp}', [AuthController::class, 'confirmation_link'])->name('confirmation_link');
+Route::post('/register-confirmation', [AuthController::class, 'confirmation_api'])->name('confirmation_api');

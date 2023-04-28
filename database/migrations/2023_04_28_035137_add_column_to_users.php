@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('status')->before('created_at')->comment('0=ditolak, 1=ditetima, -1=pengajuan');
-            $table->string('otp_confirmation')->before('status');
+            $table->string('otp')->nullable()->before('status');
         });
     }
 

@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'name' => ['required', 'min:3'],
@@ -32,7 +33,7 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'otp_confirmation' => $otp,
+                'otp' => $otp,
                 'status' => User::PENGAJUAN
             ]);
 
@@ -40,7 +41,7 @@ class AuthController extends Controller
                 ->send(new RegisterMail([
                     'email' => $request->email,
                     'otp' => $otp,
-                    'link' => route('confirmation', ['email' => $request->email, 'otp' => $otp])
+                    'link' => route('confirmation_link', ['email' => $request->email, 'otp' => $otp])
                 ]));
 
             DB::commit();
@@ -49,6 +50,75 @@ class AuthController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function confirmation_link($email, $otp)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::where('email', $email)->first();
+
+            // jika email sudah diverifiksi
+            if ($user->email_verified_at != null) return response()->json(['status' => false, 'messsage' => 'Email sudah diverfikasi']);
+            
+            // jika otp atau email tidak match
+            if ($user->email != $email || $user->otp != $otp) {
+                return response()->json(['status' => false, 'messsage' => 'email atau kode otp tidak valid']);
+            }
+
+            $user->email_verified_at = now();
+            $user->otp = null;
+            $user->save();
+
+            DB::commit();
+
+            return response()->json(['status' => true, 'message' => 'Berhasil verifikasi email, sedang menunggu verifikasi akun dari admin']);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function confirmation_api(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required'],
+            'otp' => ['required']
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->messages());
+        }
+        
+        $email = $request->email;
+        $otp = $request->otp;
+
+        DB::beginTransaction();
+        
+        try {
+            $user = User::where('email', $email)->first();
+
+            // jika email sudah diverifiksi
+            if ($user->email_verified_at != null) return response()->json(['status' => false, 'messsage' => 'Email sudah diverfikasi']);
+            
+            // jika otp atau email tidak match
+            if ($user->email != $email || $user->otp != $otp) {
+                return response()->json(['status' => false, 'messsage' => 'email atau kode otp tidak valid']);
+            }
+
+            $user->email_verified_at = now();
+            $user->otp = null;
+            $user->save();
+
+            DB::commit();
+
+            return response()->json(['status' => true, 'message' => 'Berhasil verifikasi email, sedang menunggu verifikasi akun dari admin']);
+        } catch (Exception $e) {
+            DB::rollback();
+
             return response()->json(['status' => false, 'message' => $e->getMessage()]);
         }
     }
