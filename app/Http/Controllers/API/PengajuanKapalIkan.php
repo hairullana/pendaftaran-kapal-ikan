@@ -188,8 +188,21 @@ class PengajuanKapalIkan extends Controller
         }
     }
 
-    public function detail($id)
+    public function detail(Request $request, $id)
     {
+        $token = $request->header('token');
+
+        $public_token = PublicToken::where('token', $token)->first();
+        if(!$public_token) {
+            return response()->json(['status' => false, 'message' => 'Token tidak valid, silahkan minta token baru ke admin']);
+        } else if ($public_token->hit == 100) {
+            $public_token->delete();
+            return response()->json(['status' => false, 'message' => 'Token expired, silahkan minta token baru ke admin']);
+        }
+
+        $public_token->hit += 1;
+        $public_token->save();
+
         $kapal_ikan = KapalIkan::with('user')->find($id);
         $kapal_ikan->makeHidden(['dokumen_perizinan']);
 
