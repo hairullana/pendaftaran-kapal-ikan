@@ -7,6 +7,7 @@ use App\Models\KapalIkan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\PublicToken;
 use Illuminate\Support\Facades\Validator;
 
 class PengajuanKapalIkan extends Controller
@@ -193,5 +194,32 @@ class PengajuanKapalIkan extends Controller
         $kapal_ikan->makeHidden(['dokumen_perizinan']);
 
         return response()->json(['status' => true, 'data' => $kapal_ikan]);
+    }
+
+    public function generate_token()
+    {
+        $token = sha1(now() . auth()->user()->id . now());
+
+        PublicToken::create([
+            'token' => $token,
+            'hit' => 0,
+            'created_by' => auth()->user()->id
+        ]);
+
+        return response()->json(['status' => true, 'message' => 'Success create public token']);
+    }
+
+    public function delete_token($token)
+    {
+        PublicToken::where('token', $token)->delete();
+
+        return response()->json(['status' => true, 'message' => 'Success delete public token']);
+    }
+
+    public function list_token()
+    {
+        $token = PublicToken::all();
+
+        return response()->json(['status' => true, 'list_token' => $token]);
     }
 }

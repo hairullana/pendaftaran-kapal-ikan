@@ -49,5 +49,8 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/list-pengajuan-kapal-ikan', [PengajuanKapalIkan::class, 'list'])->name('list-pengajuan-kapal-ikan')->middleware('role:admin');
     Route::post('/terima-pengajuan-kapal-ikan/{id}', [PengajuanKapalIkan::class, 'terima'])->name('terima-pengajuan-kapal-ikan')->middleware('role:admin');
     Route::post('/tolak-pengajuan-kapal-ikan/{id}', [PengajuanKapalIkan::class, 'tolak'])->name('tolak-pengajuan-kapal-ikan')->middleware('role:admin');
+    Route::post('/generate-token', [PengajuanKapalIkan::class, 'generate_token'])->name('generate-token')->middleware('role:admin');
+    Route::get('/list-token', [PengajuanKapalIkan::class, 'list_token'])->name('list-token')->middleware('role:admin');
+    Route::delete('/delete-token/{token}', [PengajuanKapalIkan::class, 'delete_token'])->name('delete-token')->middleware('role:admin');
 });
 Route::get('/kapal-ikan/{id}', [PengajuanKapalIkan::class, 'detail'])->name('detail-kapal-ikan');
