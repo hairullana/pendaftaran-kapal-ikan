@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('kapal_ikans', function (Blueprint $table) {
-            $table->text('alasan_ditolak')->before('created_at');
+            $table->text('alasan_ditolak')->nullable()->before('created_at');
         });
     }
 
