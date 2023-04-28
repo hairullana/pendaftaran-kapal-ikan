@@ -186,4 +186,12 @@ class PengajuanKapalIkan extends Controller
             return response()->json(['status' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    public function detail($id)
+    {
+        $kapal_ikan = KapalIkan::with('user')->find($id);
+        $kapal_ikan->makeHidden(['dokumen_perizinan']);
+
+        return response()->json(['status' => true, 'data' => $kapal_ikan]);
+    }
 }

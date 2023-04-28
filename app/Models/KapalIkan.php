@@ -14,4 +14,9 @@ class KapalIkan extends Model
     const DITERIMA = 1;
 
     protected $guarded = ['id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

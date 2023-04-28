@@ -50,3 +50,4 @@ Route::middleware('auth:api')->group(function() {
     Route::post('/terima-pengajuan-kapal-ikan/{id}', [PengajuanKapalIkan::class, 'terima'])->name('terima-pengajuan-kapal-ikan')->middleware('role:admin');
     Route::post('/tolak-pengajuan-kapal-ikan/{id}', [PengajuanKapalIkan::class, 'tolak'])->name('tolak-pengajuan-kapal-ikan')->middleware('role:admin');
 });
+Route::get('/kapal-ikan/{id}', [PengajuanKapalIkan::class, 'detail'])->name('detail-kapal-ikan');
