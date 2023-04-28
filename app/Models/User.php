@@ -55,4 +55,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function kapal_ikan()
+    {
+        return $this->hasMany(KapalIkan::class);
+    }
 }

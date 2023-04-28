@@ -143,8 +143,8 @@ class AuthController extends Controller
         //get credentials from request
         $credentials = $request->only('email', 'password');
 
-        //if auth failed
-        if(!$token = auth()->guard('api')->attempt($credentials)) {
+        // if auth failed (expired 60 minutes)
+        if(!$token = auth()->guard('api')->setTTL(60)->attempt($credentials)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Email atau Password Anda salah'
