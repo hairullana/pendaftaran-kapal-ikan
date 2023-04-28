@@ -1,0 +1,780 @@
+{
+	"info": {
+		"_postman_id": "7320900f-0117-4a78-8b16-955cd20242a0",
+		"name": "Pendaftaran Kapal Ikan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18100093"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/register?email=hairullana99@gmail.com&name=Hairul Lana&password=123&password_confirmation=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hairullana99@gmail.com"
+								},
+								{
+									"key": "name",
+									"value": "Hairul Lana"
+								},
+								{
+									"key": "password",
+									"value": "123"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmation Email (Link)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/register-confirmation/hairullana99@gmail.com/234732",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register-confirmation",
+								"hairullana99@gmail.com",
+								"234732"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmation Email (API)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/register-confirmation?email=hairullana99@gmail.com&otp=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register-confirmation"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hairullana99@gmail.com"
+								},
+								{
+									"key": "otp",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/login?email=user@gmail.com&password=123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List New User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY0MTIxLCJleHAiOjE2ODI2Njc3MjEsIm5iZiI6MTY4MjY2NDEyMSwianRpIjoieTJzSDV0b0RUdkNub1AyYiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kmxvPEStePZ3rQn8aP2q3PuNNYYkotokl3vdZ3Alz5c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/verifikasi-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"verifikasi-user"
+							],
+							"query": [
+								{
+									"key": "Token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjYyODc4LCJleHAiOjE2ODI2NjY0NzgsIm5iZiI6MTY4MjY2Mjg3OCwianRpIjoiSFZhRGhxTU8xWmI2R1BzMyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.vnSuHAOxvWQYA5nZcx0oqfjR9cJQuhj6vwnJyv9ANQ4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terima User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjYzNTY0LCJleHAiOjE2ODI2NjcxNjQsIm5iZiI6MTY4MjY2MzU2NCwianRpIjoibjBmZFJVVVROZlNrOTA3eiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Kr2Xue8AjDcu4urfa_K-FnpTHOmD0HWkgxIjqCzkJYQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/terima-user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"terima-user",
+								"2"
+							],
+							"query": [
+								{
+									"key": "Token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjYyODc4LCJleHAiOjE2ODI2NjY0NzgsIm5iZiI6MTY4MjY2Mjg3OCwianRpIjoiSFZhRGhxTU8xWmI2R1BzMyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.vnSuHAOxvWQYA5nZcx0oqfjR9cJQuhj6vwnJyv9ANQ4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tolak User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjYzNTY0LCJleHAiOjE2ODI2NjcxNjQsIm5iZiI6MTY4MjY2MzU2NCwianRpIjoibjBmZFJVVVROZlNrOTA3eiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Kr2Xue8AjDcu4urfa_K-FnpTHOmD0HWkgxIjqCzkJYQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/tolak-user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tolak-user",
+								"2"
+							],
+							"query": [
+								{
+									"key": "Token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjYyODc4LCJleHAiOjE2ODI2NjY0NzgsIm5iZiI6MTY4MjY2Mjg3OCwianRpIjoiSFZhRGhxTU8xWmI2R1BzMyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.vnSuHAOxvWQYA5nZcx0oqfjR9cJQuhj6vwnJyv9ANQ4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pengajuan Kapal Ikan",
+			"item": [
+				{
+					"name": "Pengajuan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY1ODcxLCJleHAiOjE2ODI2Njk0NzEsIm5iZiI6MTY4MjY2NTg3MSwianRpIjoiSDE2Z1BTU3RUWklkaHNVcSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.qGEH1pXGud60w8p6gxEvqFgEYCL7pkS-K6nSiJlkvZQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/pengajuan-kapal-ikan?kode_kapal=K123&nama_kapal=Kapal Ikan K123&nama_pemilik=Hairul Lana&alamat_pemilik=Denpasar - Bali&ukuran_kapal=10x4 meter&kapten=Hairul Lana&jumlah_anggota=5&foto_kapal=test&nomor_izin=123/ND2/SWW&dokumen_perizinan=dhewui",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pengajuan-kapal-ikan"
+							],
+							"query": [
+								{
+									"key": "kode_kapal",
+									"value": "K123"
+								},
+								{
+									"key": "nama_kapal",
+									"value": "Kapal Ikan K123"
+								},
+								{
+									"key": "nama_pemilik",
+									"value": "Hairul Lana"
+								},
+								{
+									"key": "alamat_pemilik",
+									"value": "Denpasar - Bali"
+								},
+								{
+									"key": "ukuran_kapal",
+									"value": "10x4 meter"
+								},
+								{
+									"key": "kapten",
+									"value": "Hairul Lana"
+								},
+								{
+									"key": "jumlah_anggota",
+									"value": "5"
+								},
+								{
+									"key": "foto_kapal",
+									"value": "test"
+								},
+								{
+									"key": "nomor_izin",
+									"value": "123/ND2/SWW"
+								},
+								{
+									"key": "dokumen_perizinan",
+									"value": "dhewui"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Pengajuan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY1ODcxLCJleHAiOjE2ODI2Njk0NzEsIm5iZiI6MTY4MjY2NTg3MSwianRpIjoiSDE2Z1BTU3RUWklkaHNVcSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.qGEH1pXGud60w8p6gxEvqFgEYCL7pkS-K6nSiJlkvZQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/edit-pengajuan-kapal-ikan/1?nama_kapal=Kapal Ikan K123&nama_pemilik=Hairul Lanaa&alamat_pemilik=Denpasar - Bali&ukuran_kapal=10x4 meter&kapten=Hairul Lana&jumlah_anggota=5&foto_kapal=test&nomor_izin=123/ND2/SWW&dokumen_perizinan=dhewui",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"edit-pengajuan-kapal-ikan",
+								"1"
+							],
+							"query": [
+								{
+									"key": "kode_kapal",
+									"value": "K1232",
+									"disabled": true
+								},
+								{
+									"key": "nama_kapal",
+									"value": "Kapal Ikan K123"
+								},
+								{
+									"key": "nama_pemilik",
+									"value": "Hairul Lanaa"
+								},
+								{
+									"key": "alamat_pemilik",
+									"value": "Denpasar - Bali"
+								},
+								{
+									"key": "ukuran_kapal",
+									"value": "10x4 meter"
+								},
+								{
+									"key": "kapten",
+									"value": "Hairul Lana"
+								},
+								{
+									"key": "jumlah_anggota",
+									"value": "5"
+								},
+								{
+									"key": "foto_kapal",
+									"value": "test"
+								},
+								{
+									"key": "nomor_izin",
+									"value": "123/ND2/SWW"
+								},
+								{
+									"key": "dokumen_perizinan",
+									"value": "dhewui"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Pengajuan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/list-pengajuan-kapal-ikan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"list-pengajuan-kapal-ikan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terima Pengajuan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/terima-pengajuan-kapal-ikan/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"terima-pengajuan-kapal-ikan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Kapal Ikan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/kapal-ikan/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kapal-ikan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Kapal Ikan (public)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/kapal-ikan/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kapal-ikan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tolak Pengajuan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/tolak-pengajuan-kapal-ikan/1?alasan=dokumen tidak lengkap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tolak-pengajuan-kapal-ikan",
+								"1"
+							],
+							"query": [
+								{
+									"key": "alasan",
+									"value": "dokumen tidak lengkap"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profil",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY5MjM1LCJleHAiOjE2ODI2NzI4MzUsIm5iZiI6MTY4MjY2OTIzNSwianRpIjoiTHI2dTVMS2ZXMG1hUmwzSiIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.NZ98BwOrbvTnQQb1HpBxQhyiFdU0Jq6R9qEXCtWkcEM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users?name=HLA&email=hairullana99@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "HLA"
+								},
+								{
+									"key": "email",
+									"value": "hairullana99@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjgyNjY2NjMzLCJleHAiOjE2ODI2NzAyMzMsIm5iZiI6MTY4MjY2NjYzMywianRpIjoia0Q3aE1xODFqTmRhNFc4USIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.jQDtrsDkw4MTIvMeo_2sVMgWdQDDo61DqCjCGkk1nNI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
