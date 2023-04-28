@@ -67,8 +67,8 @@ class PengajuanKapalIkan extends Controller
 
         // cek ada datanya atau tidak
         if (!$kapal_ikan) return response()->json(['status' => false, 'message' => 'Tidak bisa edit karena Kapal Ikan tidak ditemukan atau sudah dihapus']);
-        // jika bukan punya si user, jangan kasi edit
-        if ($kapal_ikan->user_id != auth()->user()->id) return response()->json(['status' => false, 'message' => 'Tidak bisa edit karena Kapal ikan bukan milik anda']);
+        // jika yg edit user dan kapal bukan punya si user, jangan kasi edit
+        if (auth()->user()->hasRole('user') && $kapal_ikan->user_id != auth()->user()->id) return response()->json(['status' => false, 'message' => 'Tidak bisa edit karena Kapal ikan bukan milik anda']);
         // jika bukan punya si user, jangan kasi edit
         if ($kapal_ikan->status != KapalIkan::PENGAJUAN) return response()->json(['status' => false, 'message' => 'Tidak bisa edit karena Kapal ikan sudah bukan dalam status pengajuan']);
 
