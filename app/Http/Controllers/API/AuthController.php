@@ -122,4 +122,37 @@ class AuthController extends Controller
             return response()->json(['status' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->messages());
+        }
+
+        $user = User::where('email', $request->email)->first();
+        if ($user->status == User::PENGAJUAN) return response()->json(['status' => false, 'message' => 'Email belum diverifikasi']);
+        if ($user->status == User::DITOLAK) return response()->json(['status' => false, 'message' => 'Akun ditolak oleh admin']);
+
+        //get credentials from request
+        $credentials = $request->only('email', 'password');
+
+        //if auth failed
+        if(!$token = auth()->guard('api')->attempt($credentials)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email atau Password Anda salah'
+            ]);
+        }
+
+        //if auth success
+        return response()->json([
+            'success' => true,
+            'token'   => $token   
+        ], 200);
+    }
 }

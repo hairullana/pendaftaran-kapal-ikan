@@ -25,13 +25,15 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'status' => User::DITERIMA,
         ]);
+        // default akun user (blm verified email)
         $user = User::create([
             'email' => 'user@gmail.com',
             'name' => 'user',
             'password' => Hash::make(123),
-            'email_verified_at' => now(),
-            'status' => User::DITERIMA,
+            'status' => User::PENGAJUAN,
+            'otp' => 111111
         ]);
+        
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'user']);

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+// auth
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/register-confirmation/{email}/{otp}', [AuthController::class, 'confirmation_link'])->name('confirmation_link');
 Route::post('/register-confirmation', [AuthController::class, 'confirmation_api'])->name('confirmation_api');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/verifikasi-user', [AuthController::class, 'verifikasi_user'])->name('verifikasi-user');
