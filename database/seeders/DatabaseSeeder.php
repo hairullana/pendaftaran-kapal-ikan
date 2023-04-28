@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -33,12 +34,21 @@ class DatabaseSeeder extends Seeder
             'status' => User::PENGAJUAN,
             'otp' => 111111
         ]);
-        
 
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'user']);
+        // role nya
+        $role_admin = Role::create(['name' => 'admin']);
+        $role_user = Role::create(['name' => 'user']);
 
+        // assign
         $admin->assignRole('admin');
         $user->assignRole('user');
+
+        // permission
+        $list_new_user = Permission::create(['name' => 'list new user']); // cek list user yang baru daftar
+        $acc_user = Permission::create(['name' => 'acc user']); // acc atau tolak user
+
+        // give permission to role
+        // $role_admin->givePermissionTo($list_new_user);
+        // $role_admin->givePermissionTo($acc_user);
     }
 }

@@ -29,13 +29,15 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
             $otp = rand(100000,999999); // 6 angka
-            User::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'otp' => $otp,
                 'status' => User::PENGAJUAN
             ]);
+
+            $user->assignRole('user');
 
             Mail::to($request->email)
                 ->send(new RegisterMail([
@@ -154,5 +156,55 @@ class AuthController extends Controller
             'success' => true,
             'token'   => $token   
         ], 200);
+    }
+
+    public function list_verifikasi_user()
+    {
+        $new_user = User::where('status', User::PENGAJUAN)->get();
+        return response(['status' => true, 'data' => $new_user]);
+    }
+
+    public function terima_user($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
+
+            // jika sudah di acc atau tolak
+            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'User sudah di terima / tolak oleh admin sebelumnya']);
+
+            $user->status = User::DITERIMA;
+            $user->save();
+
+            DB::commit();
+
+            return response(['status' => true, 'message' => 'Berhasil menerima user', 'data' => $user]);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function tolak_user($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
+
+            // jika sudah di acc atau tolak
+            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'User sudah di terima / tolak oleh admin sebelumnya']);
+
+            $user->status = User::DITOLAK;
+            $user->save();
+
+            DB::commit();
+
+            return response(['status' => true, 'message' => 'Berhasil menolak user', 'data' => $user]);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
     }
 }

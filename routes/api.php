@@ -24,4 +24,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/register-confirmation/{email}/{otp}', [AuthController::class, 'confirmation_link'])->name('confirmation_link');
 Route::post('/register-confirmation', [AuthController::class, 'confirmation_api'])->name('confirmation_api');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/verifikasi-user', [AuthController::class, 'verifikasi_user'])->name('verifikasi-user');
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/verifikasi-user', [AuthController::class, 'list_verifikasi_user'])->name('list-verifikasi-user')->middleware('role:admin');
+    Route::post('/terima-user/{id_user}', [AuthController::class, 'terima_user'])->name('terima-user')->middleware('role:admin');
+    Route::post('/tolak-user/{id_user}', [AuthController::class, 'tolak_user'])->name('tolak-user')->middleware('role:admin');
+});
