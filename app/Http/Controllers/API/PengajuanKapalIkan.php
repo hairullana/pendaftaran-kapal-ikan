@@ -61,4 +61,48 @@ class PengajuanKapalIkan extends Controller
         $new_kapal = KapalIkan::where('status', KapalIkan::PENGAJUAN)->get();
         return response(['status' => true, 'data' => $new_kapal]);
     }
+
+    public function terima($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = KapalIkan::find($id);
+
+            // jika sudah di acc atau tolak
+            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
+
+            $user->status = KapalIkan::DITERIMA;
+            $user->save();
+
+            DB::commit();
+
+            return response()->json(['status' => false, 'message' => 'Suskes terima pengajuan kapal ikan']);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function tolak($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = KapalIkan::find($id);
+
+            // jika sudah di acc atau tolak
+            if ($user->status == 0 || $user->status == 1) return response()->json(['status' => false, 'message' => 'Kapal Ikan sudah di terima / tolak oleh admin sebelumnya']);
+
+            $user->status = KapalIkan::DITOLAK;
+            $user->save();
+
+            DB::commit();
+
+            return response()->json(['status' => false, 'message' => 'Suskes tolak pengajuan kapal ikan']);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
+    }
 }
