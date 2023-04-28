@@ -8,6 +8,7 @@ use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\KapalIkan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +24,13 @@ class UserController extends Controller
     {
         $new_user = User::with('kapal_ikan')->find($id);
         return response(['status' => true, 'data' => $new_user]);
+    }
+
+    public function delete_users($id)
+    {
+        User::find($id)->delete();
+        KapalIkan::where('user_id', $id)->delete();
+        return response(['status' => true, 'message' => 'Berhasil menghapus data user dan kapal yang dimiliki']);
     }
 
     public function edit_profile(Request $request)

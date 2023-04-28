@@ -38,6 +38,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UserController::class, 'list_users'])->name('list-user')->middleware('role:admin');
     Route::put('/users', [UserController::class, 'edit_profile'])->name('edit-profile')->middleware('role:user');
     Route::get('/users/{id}', [UserController::class, 'detail_users'])->name('detail-user')->middleware('role:admin');
+    Route::delete('/users/{id}', [UserController::class, 'delete_users'])->name('delete-user')->middleware('role:admin');
 });
 
 // kapal ikan pengajuan
