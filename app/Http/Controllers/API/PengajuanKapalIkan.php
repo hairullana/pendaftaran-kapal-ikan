@@ -33,6 +33,7 @@ class PengajuanKapalIkan extends Controller
         DB::beginTransaction();
         try {
             KapalIkan::create([
+                'user_id' => auth()->user()->id,
                 'kode_kapal' => $request->kode_kapal,
                 'nama_kapal' => $request->nama_kapal,
                 'nama_pemilik' => $request->nama_pemilik,
