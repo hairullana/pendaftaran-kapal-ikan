@@ -11,8 +11,6 @@ function fizz_buz($arr) {
       if ($tmp) $berhasil_bagi++;
     }
 
-    echo $berhasil_bagi . '<br/>';
-
     if ($berhasil_bagi == 2) {
       $hasil[] = 'FizBuzz';
     } elseif ($number % 2 == 0) {
