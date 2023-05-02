@@ -1,29 +1,52 @@
 <?php
 
-function fizz_buz($arr) {
+function fizz_buz($number)
+{
   $hasil = [];
 
-  foreach ($arr as $number) {
+  for ($i = 1; $i <= $number; $i++) {
+    // cek berhasil bagi ada berapa
+    // syarat bil prima hanya bisa dibagi 1 dan dirinya sendiri
     $berhasil_bagi = 0;
-    for ($i = $number; $i > 0 ; $i--) {
-      // berhasil dibagi
-      $tmp = $number % $i == 0;
-      if ($tmp) $berhasil_bagi++;
+    for ($j = $i; $j > 0; $j--) {
+      if ($i % $j == 0) $berhasil_bagi++;
     }
 
     if ($berhasil_bagi == 2) {
       $hasil[] = 'FizBuzz';
-    } elseif ($number % 2 == 0) {
+    } elseif ($i % 2 == 0) {
       $hasil[] = 'Buzz';
-    } else if ($number % 2 == 1) {
+    } else if ($i % 2 == 1) {
       $hasil[] = 'Fizz';
     }
   }
 
-  foreach ($hasil as $i => $num) {
-    echo $arr[$i] . ': ' . $num . '<br/>';
+  for ($i = 1; $i <= $number; $i++) {
+    echo $i . ' => ' . $hasil[$i-1] . '<br/>';
   }
 }
 
-fizz_buz([1,2,3,4,5,6,7,8,9,10]);
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="" method="post">
+    <input type="number" name="number" value="<?php if (isset($_POST['number']) && (int)$_POST['number'] > 0) echo (int)$_POST['number']; ?>">
+    <button type="submit">check</button>
+  </form>
+
+  <div>
+    <?php if (isset($_POST['number']) && (int)$_POST['number'] > 0) fizz_buz((int)$_POST['number']); ?>
+  </div>
+</body>
+
+</html>
